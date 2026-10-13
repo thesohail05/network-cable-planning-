@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Network Cable Planning Tool</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <p class="eyebrow">NETWORK DESIGN MINI PROJECT</p>
+      <h1>Network Cable Planning</h1>
+      <p>Plan cable runs, estimate cable requirements, and organize network connections.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <div class="section-heading">
+        <div>
+          <h2>Add a cable run</h2>
+          <p>Enter the connection details to calculate the estimated cable length.</p>
+        </div>
+        <span class="status-dot">Ready</span>
+      </div>
+
+      <form id="cableForm">
+        <div class="form-grid">
+          <label>Source device
+            <input id="source" type="text" placeholder="e.g. Router" required />
+          </label>
+          <label>Destination device
+            <input id="destination" type="text" placeholder="e.g. Lab PC 01" required />
+          </label>
+          <label>Cable type
+            <select id="cableType">
+              <option value="Cat5e">Cat5e Ethernet</option>
+              <option value="Cat6" selected>Cat6 Ethernet</option>
+              <option value="Fiber">Fiber optic</option>
+            </select>
+          </label>
+          <label>Measured distance (meters)
+            <input id="distance" type="number" min="0.1" step="0.1" placeholder="e.g. 18" required />
+          </label>
+          <label>Extra allowance (%)
+            <input id="allowance" type="number" min="0" max="100" step="1" value="10" required />
+          </label>
+          <label>Room / location
+            <input id="location" type="text" placeholder="e.g. Computer Lab" />
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="primary" type="submit">＋ Add cable run</button>
+          <button class="secondary" id="sampleBtn" type="button">Load sample data</button>
+        </div>
+        <p id="message" class="message" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <span class="stat-label">Cable runs</span>
+        <strong id="runCount">0</strong>
+        <span class="stat-note">Connections planned</span>
+      </article>
+      <article class="stat-card">
+        <span class="stat-label">Measured distance</span>
+        <strong><span id="measuredTotal">0.0</span> <small>m</small></strong>
+        <span class="stat-note">Before extra allowance</span>
+      </article>
+      <article class="stat-card accent">
+        <span class="stat-label">Cable to purchase</span>
+        <strong><span id="purchaseTotal">0.0</span> <small>m</small></strong>
+        <span class="stat-note">Includes allowance</span>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="section-heading table-heading">
+        <div>
+          <h2>Planned connections</h2>
+          <p>Review the plan or export it as a CSV file.</p>
+        </div>
+        <button id="exportBtn" class="secondary" type="button">↓ Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Connection</th><th>Cable</th><th>Location</th>
+              <th>Distance</th><th>With allowance</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cableTable">
+            <tr class="empty-row"><td colspan="7">No cable runs yet. Add your first connection above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tip"><strong>Planning tip:</strong> Measure the real cable route, include vertical drops, and keep each copper Ethernet channel within the recommended 100 m limit.</div>
+    </section>
+
+    <footer>Network Cable Planning Tool · Student Mini Project · Runs in your browser</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
